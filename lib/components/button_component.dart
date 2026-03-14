@@ -4,23 +4,25 @@ class ButtonComponent extends StatelessWidget {
 
   final String route;
   final String txt;
+  final Color bgColor;
 
   const ButtonComponent({
     super.key,
     required this.route,
     required this.txt,
+    required this.bgColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 250,
+      width: MediaQuery.of(context).size.width * 0.9,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 15),
-          backgroundColor: Colors.black87,
+          backgroundColor: bgColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
         onPressed: () {
