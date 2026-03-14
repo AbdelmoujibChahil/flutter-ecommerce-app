@@ -6,7 +6,7 @@ class ButtonComponent extends StatelessWidget {
   final String txt;
   final Color bgColor;
 
-  const ButtonComponent({
+ const  ButtonComponent({
     super.key,
     required this.route,
     required this.txt,

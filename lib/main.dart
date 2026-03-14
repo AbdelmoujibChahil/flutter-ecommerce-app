@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project/app/pages/signup.dart';
 import 'package:project/home.dart';
-import 'package:project/pages/login.dart';
-import 'package:project/pages/signup.dart';
-import 'package:project/pages/welcomePage.dart';
+import 'package:project/app/pages/login.dart';
+import 'package:project/app/pages/welcomePage.dart';
 void main() {
   runApp(MaterialApp(
     home: WelcomePage(),

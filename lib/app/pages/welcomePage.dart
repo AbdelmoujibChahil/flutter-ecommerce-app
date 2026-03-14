@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:project/components/button_component.dart';
-import 'package:project/components/space_component.dart';
-import 'package:project/components/text_component.dart';
+import 'package:project/app/components/button_component.dart';
+import 'package:project/app/components/space_component.dart';
+import 'package:project/app/components/text_component.dart';
 import 'package:project/utils/colors.dart';
 
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({super.key});
+   WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +16,20 @@ class WelcomePage extends StatelessWidget {
       ),
       body: 
          Container(
-          padding: const EdgeInsets.all(50),
+          padding:  EdgeInsets.all(50),
           height: size.height,
           width: size.width,
           color: welcomeBg,
           child: Column(
             children: [
-              const TextComponent(
+               TextComponent(
                 txt: "Welcome",
                 sizeFont: 30,
                 fw: FontWeight.bold,
                 align: TextAlign.center,
                 family : "Bold",
               ),
-              const TextComponent(
+               TextComponent(
                 txt: "ManMode Shopping House",
                 sizeFont: 18,
                 fw: FontWeight.normal,
@@ -37,13 +37,13 @@ class WelcomePage extends StatelessWidget {
 
               ),
                    h(70),
-                const _WelcomeImage(),
+                 _WelcomeImage(),
                    h(70),
               ButtonComponent(route: "/login", txt: "Login", bgColor: mainColor),
                    h(20),
                ButtonComponent(route: "/signup", txt: "Sign Up", bgColor: loginButtonColor),
                    h(50),
-              const TextComponent(
+               TextComponent(
                 txt: "Not Thanks",
                 sizeFont: 15,
                 fw: FontWeight.normal,
@@ -59,7 +59,7 @@ class WelcomePage extends StatelessWidget {
 }
 
 class _WelcomeImage extends StatelessWidget {
-  const _WelcomeImage();
+   _WelcomeImage();
 
   @override
   Widget build(BuildContext context) {
@@ -68,10 +68,10 @@ class _WelcomeImage extends StatelessWidget {
       scale: 2.5,
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) return child;
-        return const CircularProgressIndicator();
+        return  CircularProgressIndicator();
       },
       errorBuilder: (context, error, stackTrace) {
-        return const Icon(Icons.error);
+        return  Icon(Icons.error);
       },
     );
   }
