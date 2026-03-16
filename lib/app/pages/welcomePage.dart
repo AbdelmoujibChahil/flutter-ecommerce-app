@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project/app/components/button_component.dart';
-import 'package:project/app/components/space_component.dart';
-import 'package:project/app/components/text_component.dart';
+import 'package:project/app/pages/components/button_component.dart';
+import 'package:project/app/pages/components/space_component.dart';
+import 'package:project/app/pages/components/text_component.dart';
 import 'package:project/utils/colors.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -39,9 +39,9 @@ class WelcomePage extends StatelessWidget {
                    h(70),
                  _WelcomeImage(),
                    h(70),
-              ButtonComponent(route: "/login", txt: "Login", bgColor: mainColor),
+              ButtonComponent(onPressed:(){Navigator.pushNamed(context, "/login"); } , txt: "Login", bgColor: mainColor),
                    h(20),
-               ButtonComponent(route: "/signup", txt: "Sign Up", bgColor: loginButtonColor),
+               ButtonComponent(onPressed:(){Navigator.pushNamed(context, "/signup");} , txt: "Sign Up", bgColor: loginButtonColor),
                    h(50),
                TextComponent(
                 txt: "Not Thanks",

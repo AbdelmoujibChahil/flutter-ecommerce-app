@@ -13,6 +13,8 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        // Required for libraries that use Java 8+ API desugaring (e.g. flutter_local_notifications).
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
@@ -37,6 +39,21 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+}
+
+configurations.all {
+    resolutionStrategy {
+        // Exclude old support libraries to prevent conflicts with AndroidX
+        exclude(mapOf("group" to "com.android.support", "module" to "support-compat"))
+        exclude(mapOf("group" to "com.android.support", "module" to "support-media-compat"))
+        exclude(mapOf("group" to "com.android.support", "module" to "support-v4"))
+    }
+}
+
+dependencies {
+    // Required for desugaring of newer Java APIs (core library desugaring).
+    // Must be >= 2.1.4 for some AARs (e.g. flutter_local_notifications).
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }
 
 flutter {

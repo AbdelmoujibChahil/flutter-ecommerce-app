@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/app/components/text_component.dart';
+import 'package:project/app/pages/components/text_component.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
