@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/utils.dart';
 import 'package:project/app/pages/components/button_component.dart';
 import 'package:project/app/pages/components/space_component.dart';
 import 'package:project/app/pages/components/text_component.dart';
@@ -39,9 +41,9 @@ class WelcomePage extends StatelessWidget {
                    h(70),
                  _WelcomeImage(),
                    h(70),
-              ButtonComponent(onPressed:(){Navigator.pushNamed(context, "/login"); } , txt: "Login", bgColor: mainColor),
+              ButtonComponent(onPressed:(){Get.toNamed("/login"); } , txt: "Login", bgColor: mainColor),
                    h(20),
-               ButtonComponent(onPressed:(){Navigator.pushNamed(context, "/signup");} , txt: "Sign Up", bgColor: loginButtonColor),
+               ButtonComponent(onPressed:(){Get.toNamed('/signup');} , txt: "Sign Up", bgColor: loginButtonColor),
                    h(50),
                TextComponent(
                 txt: "Not Thanks",
