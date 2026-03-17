@@ -6,6 +6,8 @@ class FormfieldComponent extends StatelessWidget {
   final bool hide;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final String hintText;
+
 
   const FormfieldComponent({
     super.key,
@@ -14,6 +16,7 @@ class FormfieldComponent extends StatelessWidget {
     this.typeInput = TextInputType.emailAddress,
     this.controller,
     this.validator,
+    this.hintText = "",
   });
 
   @override
@@ -23,6 +26,7 @@ class FormfieldComponent extends StatelessWidget {
       keyboardType: typeInput,
       obscureText: hide,
       decoration: InputDecoration(
+        hintText: hintText,
         labelText: label,
         border: const OutlineInputBorder(),
         suffixIcon: hide ? const Icon(Icons.remove_red_eye) : null,

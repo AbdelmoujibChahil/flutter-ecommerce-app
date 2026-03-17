@@ -58,6 +58,8 @@ flutter:
 
   assets:
      - assets/images/acce.jpg
+     - assets/images/forgot.png
+     
 
 
   fonts:

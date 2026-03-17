@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:project/app/controllers/auth/loginController.dart';
 import 'package:project/app/pages/components/space_component.dart';
 import 'package:project/app/pages/components/text_component.dart';
-import 'package:project/app/pages/auth/login_form.dart';
+import 'package:project/app/pages/auth/login/login_form.dart';
 
 class LoginPage extends StatelessWidget {
   @override

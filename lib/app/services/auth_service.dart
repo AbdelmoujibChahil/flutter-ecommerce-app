@@ -47,4 +47,24 @@ class AuthService {
     return false;
   }
 
+//Send Email Code
+ Future<bool> sendCode(String email) async {
+
+    final response = await http.post(
+      Uri.parse("https://api.example.com/verify"), //API Url
+      body: {
+        "email": email,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      String token = data["token"];
+
+      // sauvegarder token
+      return true;
+    }
+
+    return false;
+  }
 }
