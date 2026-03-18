@@ -47,13 +47,13 @@ class AuthService {
     return false;
   }
 
-//Send Email Code
- Future<bool> sendCode(String email) async {
 
+Future<bool> verifyOtp(String otp) async {
+  try {
     final response = await http.post(
-      Uri.parse("https://api.example.com/verify"), //API Url
+      Uri.parse("https://api.example.com/verify"),
       body: {
-        "email": email,
+        "otp": otp,
       },
     );
 
@@ -61,10 +61,13 @@ class AuthService {
       var data = jsonDecode(response.body);
       String token = data["token"];
 
-      // sauvegarder token
       return true;
+    } else {
+      return false;
     }
-
+  } catch (e) {
     return false;
   }
+}
+  
 }

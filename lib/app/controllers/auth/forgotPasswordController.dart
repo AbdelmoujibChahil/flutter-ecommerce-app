@@ -10,6 +10,9 @@ class Forgotpasswordcontroller extends GetxController {
   var isLoading = false.obs;
   var errorMessage = Rx<String?>(null);
 
+    
+
+
   Future<void> sendCode() async {
     if (!formKey.currentState!.validate()) return;
 
@@ -22,7 +25,7 @@ try {
   );*/
    bool success = true;
   if (success) {
-    Get.offAllNamed('/verification');
+    Get.toNamed('/verification');
   } else {
     errorMessage.value = 'Email not found';
   }

@@ -46,7 +46,7 @@ class ForgotpasswordForm extends StatelessWidget {
               color: Colors.red,
               align: TextAlign.center,
             ),
-          h(10),
+          h(30),
           isLoading
               ? const CircularProgressIndicator()
               : ButtonComponent(

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
 import 'package:project/app/pages/auth/forgotPassword/forgotPassword_page.dart';
-import 'package:project/app/pages/auth/forgotPassword/verification.dart';
+import 'package:project/app/pages/auth/forgotPassword/otp.dart';
+import 'package:project/app/pages/auth/resetPassword/resetPassword.dart';
 import 'package:project/app/pages/auth/signup/signup_page.dart';
 import 'package:project/home.dart';
 import 'package:project/app/pages/auth/login/login_page.dart';
@@ -27,7 +28,9 @@ void main() {
         "/login": (context) => LoginPage(),
         "/signup": (context) => SignupPage(),
         "/forgot": (context) => ForgotpasswordPage(),
-        "/verification" : (context) => VerificationPage()
+        "/verification" : (context) => OtpPage(),
+          "/reset": (context) => ResetPasswordPage(),
+
       },
       
     ),
