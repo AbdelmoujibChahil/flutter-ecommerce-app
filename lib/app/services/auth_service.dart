@@ -69,5 +69,28 @@ Future<bool> verifyOtp(String otp) async {
     return false;
   }
 }
+
+Future<bool> resetPassword(String password,String password_confirmation) async {
+  try {
+    final response = await http.put(
+      Uri.parse("https://api.example.com/passwordChange"),
+      body: {
+        "password": password,
+        "password_confirmation":password_confirmation,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      String token = data["token"];
+
+      return true;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    return false;
+  }
+}
   
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
-import 'package:project/app/controllers/auth/forgotPasswordController.dart';
+import 'package:project/app/controllers/auth/forgotController/forgotPasswordController.dart';
 import 'package:project/app/pages/auth/forgotPassword/forgotPasswordForm.dart';
 import 'package:project/app/pages/components/button_component.dart';
 import 'package:project/app/pages/components/formField_component.dart';

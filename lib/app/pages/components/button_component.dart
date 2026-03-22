@@ -5,31 +5,46 @@ class ButtonComponent extends StatelessWidget {
   final String txt;
   final Color bgColor;
   final VoidCallback onPressed;
+    final double width;
+   Color textColor;
+   double padding ;
 
-  const ButtonComponent({
+   ButtonComponent({
     super.key,
     required this.txt,
     required this.bgColor,
     required this.onPressed,
+     this.width=0.9 ,
+    this.textColor =  Colors.white,
+    this.padding =15,
   });
 
   @override
   Widget build(BuildContext context) {
 
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: MediaQuery.of(context).size.width * width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(vertical: 15),
+          padding:  EdgeInsets.symmetric(vertical: padding),
           backgroundColor: bgColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
+           side: const BorderSide(
+             color:  Color(0xFF444fc0),
+             width: 2,
+  ),
           ),
+      
         ),
         onPressed: onPressed,
         child: Text(
           txt,
-          style: const TextStyle(color: Colors.white, fontSize: 15),
+          style: TextStyle(
+            color:textColor,
+           fontSize: 15,
+           fontFamily: "Regular"
+           ),
         ),
       ),
     );

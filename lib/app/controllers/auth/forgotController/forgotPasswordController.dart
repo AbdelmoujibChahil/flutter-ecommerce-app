@@ -23,9 +23,13 @@ try {
  /* bool success = await _authService.sendCode(
     emailController.text.trim(),
   );*/
+//TESTING :
+   await Future.delayed(Duration(seconds: 20));
    bool success = true;
-  if (success) {
+  if (success) { 
     Get.toNamed('/verification');
+     isLoading.value = false;
+
   } else {
     errorMessage.value = 'Email not found';
   }

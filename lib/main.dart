@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
+import 'package:project/app/pages/auth/congratulation/congratulation_page.dart';
 import 'package:project/app/pages/auth/forgotPassword/forgotPassword_page.dart';
 import 'package:project/app/pages/auth/forgotPassword/otp.dart';
 import 'package:project/app/pages/auth/resetPassword/resetPassword.dart';
 import 'package:project/app/pages/auth/signup/signup_page.dart';
-import 'package:project/home.dart';
+import 'package:project/app/pages/main/getStarted.dart';
+import 'package:project/app/pages/main/home.dart';
 import 'package:project/app/pages/auth/login/login_page.dart';
 import 'package:project/app/pages/welcomePage.dart';
 
@@ -21,7 +23,7 @@ void main() {
     ),
   ),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/",
+      initialRoute: "/getStarted",
       routes: {
         "/": (context) => WelcomePage(),
         "/home": (context) => HomePage(),
@@ -30,7 +32,8 @@ void main() {
         "/forgot": (context) => ForgotpasswordPage(),
         "/verification" : (context) => OtpPage(),
           "/reset": (context) => ResetPasswordPage(),
-
+          "/congratulation"     : (context) => CongratulationPage(),
+          "/getStarted"     : (context) => GetstartedPage(),
       },
       
     ),

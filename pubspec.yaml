@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
-  get: ^4.6.1
+  get: ^4.7.3
   jiffy: ^6.4.4
   http: ^1.6.0
   cached_network_image: ^3.2.0
@@ -59,7 +59,9 @@ flutter:
   assets:
      - assets/images/acce.jpg
      - assets/images/forgot.png
-     
+     - assets/images/verifier.png
+     - assets/images/home.jpg
+
 
 
   fonts:

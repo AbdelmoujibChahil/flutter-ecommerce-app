@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/app/controllers/auth/loginController.dart';
-import 'package:project/app/controllers/auth/signupController.dart';
+import 'package:project/app/controllers/auth/loginController/loginController.dart';
+import 'package:project/app/controllers/auth/signupController/signupController.dart';
 import 'package:project/app/pages/auth/signup/signup_form.dart';
 import 'package:project/app/pages/components/space_component.dart';
 import 'package:project/app/pages/components/text_component.dart';
