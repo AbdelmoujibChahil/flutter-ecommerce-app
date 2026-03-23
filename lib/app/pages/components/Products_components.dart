@@ -89,6 +89,7 @@ Widget productCard(Product product) {
               txt: "Add to Cart",
               bgColor: mainColor,
               onPressed: () {},
+              isSelected: false,
             ),
           ),
         ],

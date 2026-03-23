@@ -9,7 +9,7 @@ import 'package:project/app/pages/auth/signup/signup_page.dart';
 import 'package:project/app/pages/main/getStarted.dart';
 import 'package:project/app/pages/main/home.dart';
 import 'package:project/app/pages/auth/login/login_page.dart';
-import 'package:project/app/pages/welcomePage.dart';
+import 'package:project/app/pages/welcome/welcomePage.dart';
 
 void main() {
   runApp(

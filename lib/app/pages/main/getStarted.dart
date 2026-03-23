@@ -45,6 +45,7 @@ class GetstartedPage extends StatelessWidget {
                 },
                 txt: "Get Started",
                 bgColor: mainColor,
+                isSelected: false,
               ),
             ],
           ),

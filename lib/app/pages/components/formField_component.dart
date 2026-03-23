@@ -8,7 +8,7 @@ class FormfieldComponent extends StatelessWidget {
   final String? Function(String?)? validator;
   final String hintText;
      final Icon ? prefixIcon ;
-      final InputBorder border ;
+      final bool border ;
 
   // AJOUT
   final Widget? suffixIcon;
@@ -23,19 +23,13 @@ class FormfieldComponent extends StatelessWidget {
     this.hintText = "",
     this.suffixIcon, // AJOUT
     this.prefixIcon,
-    this.border =const  OutlineInputBorder()
+    required this.border ,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      /*  decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search),
-                  labelText: "Search",border: OutlineInputBorder()),
-                validator: (value){
-                  if(value!.isEmpty){
-                    return "Please enter a search term";
-                  }}),*/
+  
       controller: controller,
       keyboardType: typeInput,
       obscureText: hide,
@@ -43,7 +37,7 @@ class FormfieldComponent extends StatelessWidget {
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.grey,fontFamily: "bold",fontSize: 20),
         labelText: label,
-        border: InputBorder.none,
+        border: border ? null :InputBorder.none ,
         prefixIcon: prefixIcon,
 
         //  utiliser suffixIcon dynamique

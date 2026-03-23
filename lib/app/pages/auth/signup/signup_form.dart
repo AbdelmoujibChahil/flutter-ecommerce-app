@@ -33,6 +33,7 @@ class SignupForm extends StatelessWidget {
         children: [
           h(40),
           FormfieldComponent(
+            border: true,
             label: "email",
             controller: emailController,
             validator: (value) {
@@ -47,6 +48,7 @@ class SignupForm extends StatelessWidget {
           ),
           h(40),
           FormfieldComponent(
+            border: true,
             label: "Phone Number",
             controller: telController,
             validator: (value) {
@@ -62,6 +64,7 @@ class SignupForm extends StatelessWidget {
         h(40)
           ,
            FormfieldComponent(
+            border: true,
             label: "password",
             hide: true,
             typeInput: TextInputType.visiblePassword,

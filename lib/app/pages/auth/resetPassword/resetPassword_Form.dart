@@ -39,6 +39,7 @@ class ResetPassordForm extends StatelessWidget {
 
           ///  PASSWORD
           Obx(() => FormfieldComponent(
+            border: true,
                 label: "Password",
                 hide: controller.hidePassword.value,
                 typeInput: TextInputType.visiblePassword,
@@ -66,6 +67,7 @@ class ResetPassordForm extends StatelessWidget {
 
           ///  CONFIRM PASSWORD
           Obx(() => FormfieldComponent(
+            border: true,
                 label: "Confirm Password",
                 hide: controller.hideConfirmPassword.value,
                 typeInput: TextInputType.visiblePassword,

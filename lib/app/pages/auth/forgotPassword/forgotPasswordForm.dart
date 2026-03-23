@@ -28,6 +28,7 @@ class ForgotpasswordForm extends StatelessWidget {
         children: [
           h(20),
           FormfieldComponent(
+            border: true,
             label: "Email/Phone",
             controller: emailController,
             validator: (value) {

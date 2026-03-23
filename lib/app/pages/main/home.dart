@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
 
                 _buildTypeList(),
 
-                h(20),
+                h(10),
 
                 _buildSectionHeader("All Product"),
 
@@ -73,8 +73,10 @@ class HomePage extends StatelessWidget {
             borderRadius: BorderRadius.circular(100),
           ),
           child: FormfieldComponent(
+            controller:  controller.searchController,
             hintText: "Search your product",
             prefixIcon: const Icon(Icons.search),
+            border: false,
           ),
         ),
       ),
@@ -104,19 +106,17 @@ Widget _buildCategorySelector() {
 
               return Padding(
                 padding: const EdgeInsets.only(right: 10),
-                child: Obx(() => ButtonComponent(
-                      txt: cat.nom,
-                      width: 0.2,
-                      padding: 5,
-                      bgColor: controller.selectedIndex.value == index
-                          ? mainColor
-                          : white,
-                      textColor: controller.selectedIndex.value == index
-                          ? white
-                          : Colors.black,
-                      onPressed: () =>
-                          controller.selectCategory(index),
-                    )),
+                child: 
+                    Obx(() => ButtonComponent(
+                        txt: cat.nom,
+                        bgColor: controller.selectedIndex.value == index ? mainColor : white,
+                         width: 0.2,
+                         padding: 5,
+                           textColor: controller.selectedIndex.value == index  ? white  : Colors.black,
+                         onPressed: () {
+    controller.selectCategory(index);
+  },
+))
               );
             },
           ),
@@ -174,11 +174,11 @@ Widget _buildTypeList() {
   );
 }
 Widget _buildProductGrid() {
-  return Wrap(
-    spacing: 10,
-    runSpacing: 10,
-    children: controller.products
-        .map((p) => productCard(p))
-        .toList(),
-  );
+  return Obx(() => Wrap(
+  spacing: 10,
+  runSpacing: 10,
+  children: controller.filteredProducts
+      .map((p) => productCard(p))
+      .toList(),
+));
 }}

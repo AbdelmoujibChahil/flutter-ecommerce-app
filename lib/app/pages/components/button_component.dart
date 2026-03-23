@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/utils/colors.dart';
 
 class ButtonComponent extends StatelessWidget {
 
@@ -8,6 +9,7 @@ class ButtonComponent extends StatelessWidget {
     final double width;
    Color textColor;
    double padding ;
+   bool isSelected;
 
    ButtonComponent({
     super.key,
@@ -17,6 +19,7 @@ class ButtonComponent extends StatelessWidget {
      this.width=0.9 ,
     this.textColor =  Colors.white,
     this.padding =15,
+     this.isSelected=true ,
   });
 
   @override
@@ -30,8 +33,8 @@ class ButtonComponent extends StatelessWidget {
           backgroundColor: bgColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
-           side: const BorderSide(
-             color:  Color(0xFF444fc0),
+           side:  BorderSide(
+            color: isSelected ?  mainColor : Colors.transparent,
              width: 2,
   ),
           ),
