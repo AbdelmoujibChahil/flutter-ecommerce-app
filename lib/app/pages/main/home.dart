@@ -8,6 +8,7 @@ import 'package:project/app/models/Products/product.dart';
 import 'package:project/app/models/Products/type.dart';
 import 'package:project/app/pages/components/button_component.dart';
 import 'package:project/app/pages/components/Products_components.dart';
+import 'package:project/app/pages/components/elementsBar_component.dart';
 import 'package:project/app/pages/components/formField_component.dart';
 import 'package:project/app/pages/components/image_Component.dart';
 import 'package:project/app/pages/components/space_component.dart';
@@ -95,35 +96,15 @@ class HomePage extends StatelessWidget {
 Widget _buildCategorySelector() {
   return Row(
     children: [
-      Expanded(
-        child: SizedBox(
-          height: 35,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: controller.categories.length,
-            itemBuilder: (context, index) {
-              final cat = controller.categories[index];
-
-              return Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: 
-                    Obx(() => ButtonComponent(
-                        txt: cat.nom,
-                        bgColor: controller.selectedIndex.value == index ? mainColor : white,
-                         width: 0.2,
-                         padding: 5,
-                           textColor: controller.selectedIndex.value == index  ? white  : Colors.black,
-                         onPressed: () {
-    controller.selectCategory(index);
-  },
-))
-              );
-            },
-          ),
-        ),
-      ),
-      IconButton(
-        onPressed: () {},
+   Obx(() => ElementsbarComponent(
+  list: controller.categories,
+  selectedIndex: controller.selectedIndex.value,
+  onSelect: controller.selectCategory,
+)),
+        IconButton(
+        onPressed: () {
+          Get.toNamed('/filter');
+        },
         icon: const Icon(Icons.settings),
       )
     ],
@@ -146,7 +127,9 @@ Widget _buildSectionHeader(String title) {
         family: "Bold",
       ),
       TextButton(
-        onPressed: () {},
+        onPressed: () {
+           // REDIRECT PAGE ALL
+        },
         child: TextComponent(
           txt: "See all",
           color: mainColor,

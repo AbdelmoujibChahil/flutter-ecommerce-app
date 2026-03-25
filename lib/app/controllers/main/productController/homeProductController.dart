@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/app/models/Products/brands.dart';
 import 'package:project/app/models/Products/category.dart';
 import 'package:project/app/models/Products/product.dart';
 import 'package:project/app/models/Products/type.dart';
@@ -7,10 +8,27 @@ import 'package:project/app/models/Products/type.dart';
 class HomeController extends GetxController {
   var selectedIndex = 0.obs;
 var selectedCategoryId = 1.obs;
+
+
+var selectedBrandId = 0.obs; // 0 = All
+var selectedGenderId = 0.obs;
+var selectedSize = "".obs;
+
+var minPrice = 0.0.obs;
+var maxPrice = 3500.0.obs;
+
   ///  Search
   var searchController = TextEditingController();
 
   ///  DATA
+var brands = <Brands>[
+ Brands(id: 1, nom: "Nike"),
+  Brands(id: 2, nom: "Adidas"),
+ Brands(id: 3, nom: "Bata"),
+
+ ].obs;
+
+
   var categories = [
     Cat(id: 1, nom: "Kids"),
     Cat(id: 2, nom: "Man"),
@@ -26,6 +44,9 @@ var products = <Product>[
   Product(id: 2, nom: "Jacket", prix: 300, categoryId: 2),
   Product(id: 3, nom: "Shoes", prix: 400, categoryId: 1),
 ].obs;
+
+
+
 
   ///  LISTE FILTRÉE
   var filteredProducts = <Product>[].obs;

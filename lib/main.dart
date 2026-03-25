@@ -6,6 +6,7 @@ import 'package:project/app/pages/auth/forgotPassword/forgotPassword_page.dart';
 import 'package:project/app/pages/auth/forgotPassword/otp.dart';
 import 'package:project/app/pages/auth/resetPassword/resetPassword.dart';
 import 'package:project/app/pages/auth/signup/signup_page.dart';
+import 'package:project/app/pages/main/filter/filter_screen.dart';
 import 'package:project/app/pages/main/getStarted.dart';
 import 'package:project/app/pages/main/home.dart';
 import 'package:project/app/pages/auth/login/login_page.dart';
@@ -23,7 +24,7 @@ void main() {
     ),
   ),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/getStarted",
+      initialRoute: "/filter",
       routes: {
         "/": (context) => WelcomePage(),
         "/home": (context) => HomePage(),
@@ -34,6 +35,9 @@ void main() {
           "/reset": (context) => ResetPasswordPage(),
           "/congratulation"     : (context) => CongratulationPage(),
           "/getStarted"     : (context) => GetstartedPage(),
+          "/filter"     : (context) => FilterScreen(),
+          
+          
       },
       
     ),
