@@ -33,7 +33,7 @@ CategoryBox(String product,String? path){
 }
 
 
-Widget productCard(Product product) {
+Widget productCard(Product product,void Function()? onpressed) {
   return Card(
     color: white,
     margin: const EdgeInsets.all(10),
@@ -41,15 +41,16 @@ Widget productCard(Product product) {
       borderRadius: BorderRadius.circular(20),
     ),
     elevation: 4,
-    child: Container(
+    child: 
+    Container(
       width: 160,
       padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
-          ///  IMAGE
-          ClipRRect(
+     MaterialButton(onPressed: onpressed,child:
+         ///  IMAGE
+        ClipRRect(
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(20),
             ),
@@ -59,15 +60,16 @@ Widget productCard(Product product) {
               width: double.infinity,
               fit: BoxFit.cover,
             ),
-          ),
+          ) ,),
+               
 
           const SizedBox(height: 10),
 
-          ///  NOM
+          ///  name
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: TextComponent(
-              txt: product.nom,
+              txt: product.name,
               fw: FontWeight.bold,
               sizeFont: 15,
             ),
@@ -75,9 +77,9 @@ Widget productCard(Product product) {
 
           const SizedBox(height: 5),
 
-          ///  PRIX
+          ///  price
           TextComponent(
-            txt: "${product.prix} DH",
+            txt: "${product.price} DH",
           ),
 
           const SizedBox(height: 10),

@@ -52,7 +52,7 @@ class ElementsbarComponent extends StatelessWidget {
                 ),
                 onPressed: () => onSelect(index),
                 child: Text(
-                  cat.nom,
+                  cat.name,
                   style: TextStyle(
                     color:
                         isSelected ? Colors.white : Colors.black,

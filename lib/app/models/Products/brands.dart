@@ -1,9 +1,9 @@
 class Brands {
   final int id;
-  final String nom;
+  final String name;
 
   Brands({
     required this.id,
-    required this.nom,
+    required this.name,
   });
 }

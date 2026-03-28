@@ -10,6 +10,7 @@ import 'package:project/app/pages/components/button_component.dart';
 import 'package:project/app/pages/components/Products_components.dart';
 import 'package:project/app/pages/components/elementsBar_component.dart';
 import 'package:project/app/pages/components/formField_component.dart';
+import 'package:project/app/pages/components/icon_component/icon_component.dart';
 import 'package:project/app/pages/components/image_Component.dart';
 import 'package:project/app/pages/components/space_component.dart';
 import 'package:project/app/pages/components/text_component.dart';
@@ -82,14 +83,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       const SizedBox(width: 10),
-      CircleAvatar(
-        radius: 25,
-        backgroundColor: grey,
-        child: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.shopping_bag_outlined),
-        ),
-      )
+   iconComponent(Icons.shopping_bag_outlined,grey,(){})
     ],
   );
 }
@@ -101,12 +95,16 @@ Widget _buildCategorySelector() {
   selectedIndex: controller.selectedIndex.value,
   onSelect: controller.selectCategory,
 )),
-        IconButton(
-        onPressed: () {
-          Get.toNamed('/filter');
-        },
-        icon: const Icon(Icons.settings),
-      )
+      IconButton(
+         onPressed: () async {
+              final filters = await Get.toNamed('/filter');
+
+         if (filters != null) {
+               controller.applyFilters(filters);
+    }
+  },
+  icon: const Icon(Icons.settings),
+)
     ],
   );
 }
@@ -150,7 +148,7 @@ Widget _buildTypeList() {
 
         return Padding(
           padding: const EdgeInsets.only(right: 12),
-          child: CategoryBox(type.nom, type.image),
+          child: CategoryBox(type.name, type.image),
         );
       },
     ),
@@ -161,7 +159,10 @@ Widget _buildProductGrid() {
   spacing: 10,
   runSpacing: 10,
   children: controller.filteredProducts
-      .map((p) => productCard(p))
+      .map((p) => productCard(p,(){
+        Get.toNamed('/detail',arguments: p);}))
       .toList(),
 ));
-}}
+}
+
+}

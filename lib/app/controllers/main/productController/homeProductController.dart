@@ -6,46 +6,76 @@ import 'package:project/app/models/Products/product.dart';
 import 'package:project/app/models/Products/type.dart';
 
 class HomeController extends GetxController {
-  var selectedIndex = 0.obs;
+
+var selectedIndex = 0.obs;
 var selectedCategoryId = 1.obs;
-
-
+var selectedColor = Colors.black.obs;
 var selectedBrandId = 0.obs; // 0 = All
 var selectedGenderId = 0.obs;
 var selectedSize = "".obs;
-
 var minPrice = 0.0.obs;
 var maxPrice = 3500.0.obs;
-
+ 
+ 
   ///  Search
   var searchController = TextEditingController();
 
   ///  DATA
 var brands = <Brands>[
- Brands(id: 1, nom: "Nike"),
-  Brands(id: 2, nom: "Adidas"),
- Brands(id: 3, nom: "Bata"),
+ Brands(id: 1, name: "Nike"),
+  Brands(id: 2, name: "Adidas"),
+ Brands(id: 3, name: "Bata"),
 
  ].obs;
 
 
   var categories = [
-    Cat(id: 1, nom: "Kids"),
-    Cat(id: 2, nom: "Man"),
+    Cat(id: 1, name: "Kids"),
+    Cat(id: 2, name: "Man"),
   ];
 
   var types = [
-    TypeProduct(id: 1, nom: "T-shirt", image: "assets/images/home.jpg"),
-    TypeProduct(id: 2, nom: "Jean", image: "assets/images/home.jpg"),
+    TypeProduct(id: 1, name: "T-shirt", image: "assets/images/home.jpg"),
+    TypeProduct(id: 2, name: "Jean", image: "assets/images/home.jpg"),
   ];
 
 var products = <Product>[
-  Product(id: 1, nom: "T-shirt", prix: 200, categoryId: 1),
-  Product(id: 2, nom: "Jacket", prix: 300, categoryId: 2),
-  Product(id: 3, nom: "Shoes", prix: 400, categoryId: 1),
+          Product(
+            id: 1,
+            name: "T-shirt",
+            price: 200,
+            categoryId: 1,
+            brandId: 1,
+            gender: "Men",
+            image: "assets/images/home.jpg",
+            sizes: ["S", "M", "L"],
+            colors: [Colors.black, Colors.red, Colors.blue],
+          ),
+
+          Product(
+            id: 1,
+            name: "T-shirt",
+            price: 200,
+            categoryId: 1,
+            brandId: 1,
+            gender: "Men",
+            image: "assets/images/home.jpg",
+            sizes: ["S", "M", "L"],
+            colors: [Colors.black, Colors.red, Colors.blue],
+          ),
+          
+          Product(
+            id: 1,
+            name: "T-shirt",
+            price: 200,
+            categoryId: 1,
+            brandId: 1,
+            gender: "Men",
+            image: "assets/images/home.jpg",
+            sizes: ["S", "M", "L"],
+            colors: [Colors.black, Colors.red, Colors.blue],
+          )
 ].obs;
-
-
 
 
   ///  LISTE FILTRÉE
@@ -73,7 +103,7 @@ void filterProducts() {
       final matchCategory = p.categoryId == selectedCategoryId.value;
 
       final matchSearch =
-          p.nom.toLowerCase().contains(query);
+          p.name.toLowerCase().contains(query);
 
       return matchCategory && matchSearch;
     }),
@@ -86,5 +116,53 @@ void filterProducts() {
   selectedCategoryId.value = categories[index].id;
 
   filterProducts(); 
+}
+
+void applyFilters(Map<String, dynamic> filters) {
+  final brandId = filters["brandId"];
+  final gender = filters["gender"];
+  final size = filters["size"];
+  final minPrice = filters["minPrice"];
+  final maxPrice = filters["maxPrice"];
+
+  filteredProducts.assignAll(
+    products.where((p) {
+      final matchBrand =
+          brandId == 0 || p.brandId == brandId;
+
+      final matchPrice =
+          p.price >= minPrice && p.price <= maxPrice;
+
+      final matchGender =
+          gender == "All" || p.gender == gender;
+
+      final matchSize =
+          size == "All" ||  p.sizes.contains(size);
+
+      return matchBrand &&
+             matchPrice &&
+             matchGender &&
+             matchSize;
+    }),
+  );
+}
+
+
+void selectColor(Color color) {
+  selectedColor.value = color;
+}
+
+ void selectSize(String size) {
+    selectedSize.value = size;
+  }
+
+
+Map<String, dynamic> prepareOrder(Product product) {
+  return {
+    "product_id": product.id,
+    "size": selectedSize.value,
+    "color": "#${selectedColor.value.value.toRadixString(16).substring(2)}",
+    "quantity": 1,
+  };
 }
 }

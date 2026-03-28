@@ -1,6 +1,6 @@
 
   import 'package:flutter/material.dart';
-import 'package:project/app/pages/main/home.dart';
+import 'package:project/app/pages/main/home/home.dart';
 
 class DrawerComponent extends StatelessWidget {
 
