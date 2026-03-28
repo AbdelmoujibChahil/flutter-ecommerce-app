@@ -8,7 +8,7 @@ class Product {
   final int categoryId; 
   final  int brandId;
    final String gender;
-   final String image;
+   final List<String>? images;
    final String? description;
    final List<String> sizes; 
   final List<Color> colors;
@@ -20,7 +20,7 @@ class Product {
     required this.categoryId,
     required this.brandId,
     required this.gender,
-    required this.image,
+    required this.images,
      this.description,
      required this.sizes ,
      required this.colors,

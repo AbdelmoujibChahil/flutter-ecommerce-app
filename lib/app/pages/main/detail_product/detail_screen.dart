@@ -3,19 +3,20 @@ import 'package:get/get.dart';
 import 'package:project/app/controllers/main/productController/homeProductController.dart';
 import 'package:project/app/models/Products/product.dart';
 import 'package:project/app/pages/components/button_component.dart';
-import 'package:project/app/pages/components/filter_components/filter_component.dart';
 import 'package:project/app/pages/components/icon_component/icon_component.dart';
 import 'package:project/app/pages/components/space_component.dart';
 import 'package:project/app/pages/components/text_component.dart';
 import 'package:project/utils/colors.dart';
 
 class DetailScreen extends StatelessWidget {
-   DetailScreen({super.key});
-final controller = Get.find<HomeController>();
+  DetailScreen({super.key});
+
+  final controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
     final product = Get.arguments as Product;
+    final images = product.images ?? [];
 
     return Scaffold(
       appBar: AppBar(
@@ -23,9 +24,12 @@ final controller = Get.find<HomeController>();
         elevation: 0,
         backgroundColor: Colors.white,
         leading: iconComponent(
-         Icons.arrow_back,
-           Colors.white,
-         () => Get.back(),
+          Icons.arrow_back,
+          Colors.white,
+         () {
+          controller.resetDetailState();
+          Get.back();
+        },
         ),
         title: const TextComponent(
           txt: "Product Details",
@@ -34,44 +38,24 @@ final controller = Get.find<HomeController>();
         centerTitle: true,
         actions: [
           iconComponent(
-              Icons.shopping_bag_outlined,
-           const Color(0xFFF1E3C8),
+            Icons.shopping_bag_outlined,
+            const Color(0xFFF1E3C8),
             () {},
           ),
         ],
       ),
 
-      body: SingleChildScrollView( 
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              /// IMAGE
-              ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Image.asset(
-                   product.image,
-                   height: 250,
-                   width: double.infinity,
-                 fit: BoxFit.cover,),
-              ),
+              /// IMAGE SLIDER
+              _buildImageSlider(images),
 
-              h(15),
-
-              /// DOTS (slider)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  dot(false),
-                  dot(true),
-                  dot(true),
-                ],
-              ),
-
-                 h(20),
-
+              h(20),
 
               /// TITLE + ICONS
               Row(
@@ -86,15 +70,16 @@ final controller = Get.find<HomeController>();
                   ),
                   Row(
                     children: [
-                      iconComponent( Icons.favorite_border,  grey,(){}),
-                      const SizedBox(width: 10),
-                      iconComponent( Icons.share,  grey,(){}),
+                      iconComponent(Icons.favorite_border, grey, () {}),
+                      w(10),
+                      iconComponent(Icons.share, grey, () {}),
                     ],
                   )
                 ],
               ),
 
-             h(10),
+              h(10),
+
               /// DESCRIPTION
               TextComponent(
                 txt: product.description ?? "",
@@ -104,7 +89,6 @@ final controller = Get.find<HomeController>();
               ),
 
               h(20),
-
 
               /// PRICE
               Row(
@@ -116,7 +100,7 @@ final controller = Get.find<HomeController>();
                       color: Colors.grey,
                     ),
                   ),
-                  const SizedBox(width: 10),
+                  w(10),
                   Text(
                     "Tk ${product.price}",
                     style: const TextStyle(
@@ -128,93 +112,127 @@ final controller = Get.find<HomeController>();
               ),
 
               h(20),
-      //Line
-         line(grey),
+              _line(),
+
               h(20),
 
               /// SIZE
               const Text("Select Size", style: TextStyle(fontWeight: FontWeight.bold)),
-             h(10),
-          Obx(() => Wrap(
-            spacing: 10,
-            children: product.sizes.map((s) {
-            final isSelected = controller.selectedSize.value == s;
- 
-              return ButtonComponent(
-              txt: s,
-              onPressed: () => controller.selectSize(s),
-              width: 0.1,
-              padding: 10,
-              bgColor: isSelected ? mainColor : white,
-              textColor: isSelected ? Colors.white : Colors.black,
-            );
-          }).toList(),
-        )),
+              h(10),
+
+              Obx(() => Wrap(
+                    spacing: 10,
+                    children: product.sizes.map((s) {
+                      final isSelected = controller.selectedSize.value == s;
+
+                      return ButtonComponent(
+                        txt: s,
+                        onPressed: () => controller.selectSize(s),
+                        width: 0.1,
+                        padding: 10,
+                        bgColor: isSelected ? mainColor : white,
+                        textColor: isSelected ? Colors.white : Colors.black,
+                      );
+                    }).toList(),
+                  )),
 
               h(20),
 
               /// COLORS
               const Text("Select Color", style: TextStyle(fontWeight: FontWeight.bold)),
-             h(10),
-           Row(
-        children: product.colors.map((c) {
-          return colorCircle(c, controller);
-        }).toList(),
-      )
+              h(10),
+
+              Obx(() => Row(
+                    children: product.colors.map((c) {
+                      return _colorCircle(c);
+                    }).toList(),
+                  )),
             ],
           ),
         ),
       ),
     );
   }
-}
 
+  /// IMAGE SLIDER 
+  Widget _buildImageSlider(List<String> images) {
+    if (images.isEmpty) {
+      return const SizedBox(
+        height: 250,
+        child: Center(child: Text("No image")),
+      );
+    }
 
-Widget dot(bool active) {
-  return Container(
-    margin: const EdgeInsets.symmetric(horizontal: 4),
-    width: active ? 10 : 8,
-    height: active ? 10 : 8,
-    decoration: BoxDecoration(
-      color: active ? Colors.blue : Colors.grey,
-      shape: BoxShape.circle,
-    ),
-  );
-}
-
-Widget sizeBox(String text) {
-  return Container(
-    padding: const EdgeInsets.all(10),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(8),
-      border: Border.all(color: Colors.grey),
-    ),
-    child: Text(text),
-  );
-}
-
-
-Widget line (Color color) 
-{
-  return   SizedBox(height: 1,
-         width: double.infinity,
-         child: Container(color: color,) ,);
-}
-
-Widget colorCircle(Color color, HomeController controller) {
-  return GestureDetector(
-    onTap: () => controller.selectColor(color),
-    child: Obx(() => Container(
-          margin: const EdgeInsets.only(right: 10),
-          width: 30,
-          height: 30,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-            border: controller.selectedColor.value == color
-                ? Border.all(color: Colors.black, width: 3)
-                : null,
+    return Column(
+      children: [
+        SizedBox(
+          height: 250,
+          child: PageView.builder(
+            itemCount: images.length,
+            onPageChanged: controller.changeImage,
+            itemBuilder: (context, index) {
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: Image.asset(
+                  images[index],
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
+              );
+            },
           ),
-        )),
-  );
+        ),
+
+        const SizedBox(height: 10),
+
+        /// DOTS (UN SEUL Obx)
+        Obx(() => Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(images.length, (index) {
+                final isActive =
+                    controller.currentImageIndex.value == index;
+
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  width: isActive ? 10 : 8,
+                  height: isActive ? 10 : 8,
+                  decoration: BoxDecoration(
+                    color: isActive ? Colors.blue : Colors.grey,
+                    shape: BoxShape.circle,
+                  ),
+                );
+              }),
+            )),
+      ],
+    );
+  }
+
+  ///  COLOR CIRCLE 
+  Widget _colorCircle(Color color) {
+    final isSelected = controller.selectedColor.value == color;
+
+    return GestureDetector(
+      onTap: () => controller.selectColor(color),
+      child: Container(
+        margin: const EdgeInsets.only(right: 10),
+        width: 30,
+        height: 30,
+        decoration: BoxDecoration(
+          color: color,
+          shape: BoxShape.circle,
+          border: isSelected
+              ? Border.all(color: Colors.black, width: 3)
+              : null,
+        ),
+      ),
+    );
+  }
+
+  Widget _line() {
+    return Container(
+      height: 1,
+      width: double.infinity,
+      color: grey,
+    );
+  }
 }

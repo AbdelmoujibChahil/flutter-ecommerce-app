@@ -7,6 +7,7 @@ import 'package:project/app/models/Products/type.dart';
 
 class HomeController extends GetxController {
 
+var currentImageIndex = 0.obs;
 var selectedIndex = 0.obs;
 var selectedCategoryId = 1.obs;
 var selectedColor = Colors.black.obs;
@@ -47,33 +48,44 @@ var products = <Product>[
             categoryId: 1,
             brandId: 1,
             gender: "Men",
-            image: "assets/images/home.jpg",
-            sizes: ["S", "M", "L"],
+            description: "This is a T-shirt with a good priec",
+            images: [
+              "assets/images/home.jpg",
+              "assets/images/home.jpg",
+              "assets/images/home.jpg",
+            ],              sizes: ["S", "M", "L"],
             colors: [Colors.black, Colors.red, Colors.blue],
           ),
 
           Product(
-            id: 1,
-            name: "T-shirt",
-            price: 200,
-            categoryId: 1,
+            id: 2,
+            name: "Jacket", 
+            price: 300, 
+            categoryId: 2,
             brandId: 1,
             gender: "Men",
-            image: "assets/images/home.jpg",
+            images: [
+              "assets/images/home.jpg",
+              "assets/images/home.jpg",
+              "assets/images/home.jpg",
+            ],  
             sizes: ["S", "M", "L"],
+            
             colors: [Colors.black, Colors.red, Colors.blue],
           ),
-          
+
           Product(
-            id: 1,
-            name: "T-shirt",
-            price: 200,
+            id: 3,
+            name: "Shoes", 
+            price: 400, 
             categoryId: 1,
             brandId: 1,
             gender: "Men",
-            image: "assets/images/home.jpg",
-            sizes: ["S", "M", "L"],
-            colors: [Colors.black, Colors.red, Colors.blue],
+            images: [
+              "assets/images/home.jpg",
+            ],          
+            sizes: ["S", "M"],
+            colors: [Colors.black, const Color.fromARGB(255, 13, 157, 229), const Color.fromARGB(255, 71, 192, 6)],
           )
 ].obs;
 
@@ -156,6 +168,9 @@ void selectColor(Color color) {
     selectedSize.value = size;
   }
 
+void changeImage(int index) {
+  currentImageIndex.value = index;
+}
 
 Map<String, dynamic> prepareOrder(Product product) {
   return {
@@ -165,4 +180,11 @@ Map<String, dynamic> prepareOrder(Product product) {
     "quantity": 1,
   };
 }
+//reset
+void resetDetailState() {
+  selectedSize.value = "";
+  selectedColor.value = Colors.black;
+  currentImageIndex.value = 0;
+}
+
 }
