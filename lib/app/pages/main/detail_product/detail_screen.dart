@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/app/controllers/main/productController/homeProductController.dart';
+import 'package:project/app/controllers/main/productController/CartController.sdart';
+import 'package:project/app/controllers/main/productController/DetailController.dart';
 import 'package:project/app/models/Products/product.dart';
 import 'package:project/app/pages/components/button_component.dart';
 import 'package:project/app/pages/components/icon_component/icon_component.dart';
@@ -11,7 +12,8 @@ import 'package:project/utils/colors.dart';
 class DetailScreen extends StatelessWidget {
   DetailScreen({super.key});
 
-  final controller = Get.find<HomeController>();
+  final detailController = Get.put(DetailController());
+  final cartController = Get.put<CartController>(CartController());
 
   @override
   Widget build(BuildContext context) {
@@ -23,25 +25,37 @@ class DetailScreen extends StatelessWidget {
         toolbarHeight: 80,
         elevation: 0,
         backgroundColor: Colors.white,
+
+        /// BACK
         leading: iconComponent(
           Icons.arrow_back,
           Colors.white,
-         () {
-          controller.resetDetailState();
-          Get.back();
-        },
+          () {
+            detailController.reset();
+            Get.back();
+          },
         ),
+
         title: const TextComponent(
           txt: "Product Details",
           family: "Bold",
         ),
         centerTitle: true,
+
+        /// CART ICON + BADGE
         actions: [
-          iconComponent(
-            Icons.shopping_bag_outlined,
-            const Color(0xFFF1E3C8),
-            () {},
-          ),
+          Obx(() => Stack(
+                children: [
+                  iconComponent(
+                    Icons.shopping_bag_outlined,
+                    const Color(0xFFF1E3C8),
+                    () {},
+                  ),
+
+                  if (cartController.cartItems.isNotEmpty)
+                    _buildCartBadge(cartController),
+                ],
+              ))
         ],
       ),
 
@@ -85,7 +99,6 @@ class DetailScreen extends StatelessWidget {
                 txt: product.description ?? "",
                 sizeFont: 16,
                 family: "Regular",
-                align: TextAlign.start,
               ),
 
               h(20),
@@ -123,15 +136,18 @@ class DetailScreen extends StatelessWidget {
               Obx(() => Wrap(
                     spacing: 10,
                     children: product.sizes.map((s) {
-                      final isSelected = controller.selectedSize.value == s;
+                      final isSelected =
+                          detailController.selectedSize.value == s;
 
                       return ButtonComponent(
                         txt: s,
-                        onPressed: () => controller.selectSize(s),
+                        onPressed: () =>
+                            detailController.selectSize(s),
                         width: 0.1,
                         padding: 10,
                         bgColor: isSelected ? mainColor : white,
-                        textColor: isSelected ? Colors.white : Colors.black,
+                        textColor:
+                            isSelected ? Colors.white : Colors.black,
                       );
                     }).toList(),
                   )),
@@ -147,34 +163,38 @@ class DetailScreen extends StatelessWidget {
                       return _colorCircle(c);
                     }).toList(),
                   )),
-                  h(30),
-               Row(
+
+              h(30),
+
+              /// ADD TO CART
+              Row(
                 children: [
                   Expanded(
                     child: ButtonComponent(
                       width: 0.1,
-                      bgColor : mainColor,
-                      txt:  "Add to Cart",
+                      bgColor: mainColor,
+                      txt: "Add to Cart",
                       onPressed: () {
-                          if (controller.selectedSize.value.isEmpty) {
-                            Get.snackbar("Error", "Please select size");
-                              return;
-                            }
-                       if (controller.selectedColor.value == null) {
+                        if (detailController.selectedSize.value.isEmpty) {
+                          Get.snackbar("Error", "Please select size");
+                          return;
+                        }
+
+                        if (detailController.selectedColor.value == null) {
                           Get.snackbar("Error", "Please select color");
-                             return;
-                            }
-                          final orderData = controller.prepareOrder(product);
+                          return;
+                        }
 
-                          print(orderData);
-
-                          Get.snackbar("Success", "Added to cart");
+                        cartController.addToCart(
+                          product,
+                          detailController.selectedSize.value,
+                          detailController.selectedColor.value,
+                        );
                       },
                     ),
                   ),
-
                 ],
-               )
+              )
             ],
           ),
         ),
@@ -182,7 +202,7 @@ class DetailScreen extends StatelessWidget {
     );
   }
 
-  /// IMAGE SLIDER 
+  /// 🖼 IMAGE SLIDER
   Widget _buildImageSlider(List<String> images) {
     if (images.isEmpty) {
       return const SizedBox(
@@ -197,7 +217,7 @@ class DetailScreen extends StatelessWidget {
           height: 250,
           child: PageView.builder(
             itemCount: images.length,
-            onPageChanged: controller.changeImage,
+            onPageChanged: detailController.changeImage,
             itemBuilder: (context, index) {
               return ClipRRect(
                 borderRadius: BorderRadius.circular(30),
@@ -213,12 +233,12 @@ class DetailScreen extends StatelessWidget {
 
         const SizedBox(height: 10),
 
-        /// DOTS (UN SEUL Obx)
+        /// DOTS
         Obx(() => Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(images.length, (index) {
                 final isActive =
-                    controller.currentImageIndex.value == index;
+                    detailController.currentImageIndex.value == index;
 
                 return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -235,12 +255,13 @@ class DetailScreen extends StatelessWidget {
     );
   }
 
-  ///  COLOR CIRCLE 
+  ///  COLOR
   Widget _colorCircle(Color color) {
-    final isSelected = controller.selectedColor.value == color;
+    final isSelected =
+        detailController.selectedColor.value == color;
 
     return GestureDetector(
-      onTap: () => controller.selectColor(color),
+      onTap: () => detailController.selectColor(color),
       child: Container(
         margin: const EdgeInsets.only(right: 10),
         width: 30,
@@ -251,6 +272,33 @@ class DetailScreen extends StatelessWidget {
           border: isSelected
               ? Border.all(color: Colors.black, width: 3)
               : null,
+        ),
+      ),
+    );
+  }
+
+  ///  BADGE
+  Widget _buildCartBadge(CartController controller) {
+    return Positioned(
+      right: 5,
+      top: 5,
+      child: Container(
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: Colors.red,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        constraints: const BoxConstraints(
+          minWidth: 18,
+          minHeight: 18,
+        ),
+        child: Text(
+          controller.cartItems.length.toString(),
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 10,
+          ),
+          textAlign: TextAlign.center,
         ),
       ),
     );

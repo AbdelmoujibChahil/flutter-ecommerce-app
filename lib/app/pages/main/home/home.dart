@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
-import 'package:project/app/controllers/main/productController/homeProductController.dart';
+import 'package:project/app/controllers/main/productController/ProductController.dart';
 import 'package:project/app/models/Products/Category.dart';
 import 'package:project/app/models/Products/product.dart';
 import 'package:project/app/models/Products/type.dart';
@@ -21,7 +21,7 @@ import 'package:project/utils/colors.dart';
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
-  final controller = Get.put(HomeController());
+  final controller = Get.put(ProductController());
 
   @override
   Widget build(BuildContext context) {
