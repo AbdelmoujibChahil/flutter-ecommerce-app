@@ -5,6 +5,7 @@ class Product {
   final int id;
   final String name;
   final double price;
+    final double oldPrice;
   final int categoryId; 
   final  int brandId;
    final String gender;
@@ -12,7 +13,7 @@ class Product {
    final String? description;
    final List<String> sizes; 
   final List<Color> colors;
-
+   
   Product({
     required this.id,
     required this.name,
@@ -24,5 +25,7 @@ class Product {
      this.description,
      required this.sizes ,
      required this.colors,
+     required this.oldPrice,
+
   });
 }

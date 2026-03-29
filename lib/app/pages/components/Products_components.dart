@@ -31,9 +31,11 @@ CategoryBox(String product,String? path){
        ),
    );
 }
-
-
-Widget productCard(Product product,void Function()? onpressed) {
+Widget productCard(
+  Product product, 
+  void Function()? onPressed, 
+  { void Function()? onTap } // paramètre nommé optionnel
+) {
   return Card(
     color: white,
     margin: const EdgeInsets.all(10),
@@ -41,31 +43,31 @@ Widget productCard(Product product,void Function()? onpressed) {
       borderRadius: BorderRadius.circular(20),
     ),
     elevation: 4,
-    child: 
-    Container(
+    child: Container(
       width: 160,
       padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-     MaterialButton(onPressed: onpressed,child:
-         ///  IMAGE
-        ClipRRect(
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(20),
+          // IMAGE clickable
+          MaterialButton(
+            onPressed: onTap,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
+              ),
+              child: Image.asset(
+                "assets/images/home.jpg",
+                height: 150,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
-            child: Image.asset(
-              "assets/images/home.jpg",
-              height: 150,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-          ) ,),
-               
+          ),
 
           const SizedBox(height: 10),
 
-          ///  name
+          // name
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: TextComponent(
@@ -77,20 +79,20 @@ Widget productCard(Product product,void Function()? onpressed) {
 
           const SizedBox(height: 5),
 
-          ///  price
+          // price
           TextComponent(
             txt: "${product.price} DH",
           ),
 
           const SizedBox(height: 10),
 
-          ///  BOUTON
+          // BOUTON Add to Cart
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: ButtonComponent(
               txt: "Add to Cart",
               bgColor: mainColor,
-              onPressed: () {},
+              onPressed: onPressed ?? () {}, 
               isSelected: false,
             ),
           ),
