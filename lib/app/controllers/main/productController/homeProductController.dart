@@ -10,7 +10,7 @@ class HomeController extends GetxController {
 var currentImageIndex = 0.obs;
 var selectedIndex = 0.obs;
 var selectedCategoryId = 1.obs;
-var selectedColor = Colors.black.obs;
+Rx<Color?> selectedColor = Rx<Color?>(null);
 var selectedBrandId = 0.obs; // 0 = All
 var selectedGenderId = 0.obs;
 var selectedSize = "".obs;
@@ -173,11 +173,15 @@ void changeImage(int index) {
 }
 
 Map<String, dynamic> prepareOrder(Product product) {
+    final color = selectedColor.value;
+
   return {
     "product_id": product.id,
     "size": selectedSize.value,
-    "color": "#${selectedColor.value.value.toRadixString(16).substring(2)}",
-    "quantity": 1,
+    "color": color == null
+        ? null
+        : "#${color.value.toRadixString(16).substring(2).toUpperCase()}",
+     "quantity": 1,
   };
 }
 //reset

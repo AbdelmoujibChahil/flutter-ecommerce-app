@@ -147,6 +147,34 @@ class DetailScreen extends StatelessWidget {
                       return _colorCircle(c);
                     }).toList(),
                   )),
+                  h(30),
+               Row(
+                children: [
+                  Expanded(
+                    child: ButtonComponent(
+                      width: 0.1,
+                      bgColor : mainColor,
+                      txt:  "Add to Cart",
+                      onPressed: () {
+                          if (controller.selectedSize.value.isEmpty) {
+                            Get.snackbar("Error", "Please select size");
+                              return;
+                            }
+                       if (controller.selectedColor.value == null) {
+                          Get.snackbar("Error", "Please select color");
+                             return;
+                            }
+                          final orderData = controller.prepareOrder(product);
+
+                          print(orderData);
+
+                          Get.snackbar("Success", "Added to cart");
+                      },
+                    ),
+                  ),
+
+                ],
+               )
             ],
           ),
         ),
