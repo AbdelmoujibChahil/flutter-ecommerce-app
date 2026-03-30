@@ -31,11 +31,11 @@ Widget chip({
   );
 }
 
-Widget colorCircle(Color color) {
+Widget colorCircle(Color color,{double w=30,double h =30}) {
   return Container(
     margin: const EdgeInsets.only(right: 10),
-    width: 30,
-    height: 30,
+    width: w,
+    height: h,
     decoration: BoxDecoration(
       color: color,
       shape: BoxShape.circle,

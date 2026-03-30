@@ -17,7 +17,12 @@ class FilterScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.grey[100],
         elevation: 0,
-        leading: const Icon(Icons.arrow_back, color: Colors.black),
+        leading: IconButton(
+           icon: const Icon(Icons.arrow_back, color: Colors.black),
+           onPressed: () {
+           Get.back(); 
+  },
+),
         title: const Text("Filter", style: TextStyle(color: Colors.black)),
         centerTitle: true,
         actions: [
@@ -46,7 +51,7 @@ class FilterScreen extends StatelessWidget {
                   return GestureDetector(
                     onTap: () => controller.selectBrand(brand.id),
                     child: chip(
-                      text: brand.nom,
+                      text: brand.name,
                       selected: selected,
                     ),
                   );
@@ -110,8 +115,8 @@ class FilterScreen extends StatelessWidget {
               Obx(() => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("${controller.minPrice.value.toInt()} Tk"),
-                  Text("${controller.maxPrice.value.toInt()} Tk"),
+                  Text("${controller.minPrice.value.toInt()} DH"),
+                  Text("${controller.maxPrice.value.toInt()} DH"),
                 ],
               )),
 

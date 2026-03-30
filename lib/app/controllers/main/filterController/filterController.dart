@@ -6,10 +6,10 @@ class FilterController extends GetxController {
 
   ///  DATA (injectable plus tard depuis API)
   var brands = <Brands>[
-    Brands(id: 0, nom: "All"),
-    Brands(id: 1, nom: "Nike"),
-    Brands(id: 2, nom: "Adidas"),
-    Brands(id: 3, nom: "Bata"),
+    Brands(id: 0, name: "All"),
+    Brands(id: 1, name: "Nike"),
+    Brands(id: 2, name: "Adidas"),
+    Brands(id: 3, name: "Bata"),
   ].obs;
 
   var genders = ["All", "Men", "Kids"].obs;

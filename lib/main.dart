@@ -6,9 +6,10 @@ import 'package:project/app/pages/auth/forgotPassword/forgotPassword_page.dart';
 import 'package:project/app/pages/auth/forgotPassword/otp.dart';
 import 'package:project/app/pages/auth/resetPassword/resetPassword.dart';
 import 'package:project/app/pages/auth/signup/signup_page.dart';
+import 'package:project/app/pages/main/detail_product/detail_screen.dart';
 import 'package:project/app/pages/main/filter/filter_screen.dart';
-import 'package:project/app/pages/main/getStarted.dart';
-import 'package:project/app/pages/main/home.dart';
+import 'package:project/app/pages/main/getStarted/getStarted.dart';
+import 'package:project/app/pages/main/home/home.dart';
 import 'package:project/app/pages/auth/login/login_page.dart';
 import 'package:project/app/pages/welcome/welcomePage.dart';
 
@@ -24,7 +25,7 @@ void main() {
     ),
   ),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/filter",
+      initialRoute: "/home",
       routes: {
         "/": (context) => WelcomePage(),
         "/home": (context) => HomePage(),
@@ -36,7 +37,8 @@ void main() {
           "/congratulation"     : (context) => CongratulationPage(),
           "/getStarted"     : (context) => GetstartedPage(),
           "/filter"     : (context) => FilterScreen(),
-          
+          "/detail"     : (context) => DetailScreen(),
+
           
       },
       

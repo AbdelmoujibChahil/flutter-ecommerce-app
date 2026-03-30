@@ -1,26 +1,23 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
-import 'package:project/app/controllers/main/productController/homeProductController.dart';
-import 'package:project/app/models/Products/Category.dart';
-import 'package:project/app/models/Products/product.dart';
-import 'package:project/app/models/Products/type.dart';
-import 'package:project/app/pages/components/button_component.dart';
+import 'package:project/app/controllers/main/productController/CartController.dart';
+import 'package:project/app/controllers/main/productController/ProductController.dart';
 import 'package:project/app/pages/components/Products_components.dart';
+import 'package:project/app/pages/components/cart_component/cartBadge_component.dart';
 import 'package:project/app/pages/components/elementsBar_component.dart';
 import 'package:project/app/pages/components/formField_component.dart';
+import 'package:project/app/pages/components/icon_component/icon_component.dart';
 import 'package:project/app/pages/components/image_Component.dart';
 import 'package:project/app/pages/components/space_component.dart';
 import 'package:project/app/pages/components/text_component.dart';
 import 'package:project/utils/colors.dart';
 
-
-
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
-  final controller = Get.put(HomeController());
+  final controller = Get.put(ProductController());
+  final cartController = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {
@@ -81,15 +78,20 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      const SizedBox(width: 10),
-      CircleAvatar(
-        radius: 25,
-        backgroundColor: grey,
-        child: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.shopping_bag_outlined),
-        ),
-      )
+      const SizedBox(width: 10), 
+          Obx(() => Stack(
+                children: [
+                  iconComponent(
+                    Icons.shopping_bag_outlined,
+                    const Color(0xFFF1E3C8),
+                    () {},
+                  ),
+
+                  if (cartController.cartItems.isNotEmpty)
+                    buildCartBadge(cartController),
+                ],
+              ))
+      ,
     ],
   );
 }
@@ -101,12 +103,16 @@ Widget _buildCategorySelector() {
   selectedIndex: controller.selectedIndex.value,
   onSelect: controller.selectCategory,
 )),
-        IconButton(
-        onPressed: () {
-          Get.toNamed('/filter');
-        },
-        icon: const Icon(Icons.settings),
-      )
+      IconButton(
+         onPressed: () async {
+              final filters = await Get.toNamed('/filter');
+
+         if (filters != null) {
+               controller.applyFilters(filters);
+    }
+  },
+  icon: const Icon(Icons.settings),
+)
     ],
   );
 }
@@ -150,7 +156,7 @@ Widget _buildTypeList() {
 
         return Padding(
           padding: const EdgeInsets.only(right: 12),
-          child: CategoryBox(type.nom, type.image),
+          child: CategoryBox(type.name, type.image),
         );
       },
     ),
@@ -158,10 +164,17 @@ Widget _buildTypeList() {
 }
 Widget _buildProductGrid() {
   return Obx(() => Wrap(
-  spacing: 10,
-  runSpacing: 10,
-  children: controller.filteredProducts
-      .map((p) => productCard(p))
-      .toList(),
-));
-}}
+        spacing: 10,
+        runSpacing: 10,
+      children: controller.filteredProducts.map((p) {
+  return productCard(
+    p,
+   () => cartController.addToCartFromHome(p),
+
+    ///  NAVIGATE
+    onTap: () => Get.toNamed('/detail', arguments: p), 
+  );
+}).toList(),
+      ));
+}
+}

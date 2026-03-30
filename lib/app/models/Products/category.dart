@@ -1,6 +1,6 @@
 class Cat {
   final int id;
-  final String nom;
+  final String name;
 
-  Cat({required this.id, required this.nom});
+  Cat({required this.id, required this.name});
 }
