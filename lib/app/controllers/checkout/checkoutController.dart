@@ -31,7 +31,7 @@ class CheckoutController extends GetxController {
 
   // Step indicator
   final currentStep = 1.obs;
-  final totalSteps = 4;
+  final totalSteps = 3;
 
   @override
   void onInit() {
