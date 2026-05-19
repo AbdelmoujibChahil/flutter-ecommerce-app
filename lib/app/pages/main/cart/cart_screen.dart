@@ -54,7 +54,9 @@ class MyCart extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed("/home");
+                      },
                       icon: const Icon(Icons.add),
                       label: const Text("Add more items"),
                     ),
@@ -127,7 +129,14 @@ class MyCart extends StatelessWidget {
               child: SizedBox(
                 width: double.maxFinite,
                 child: ButtonComponent(
-                  onPressed: () {},
+                  onPressed: () {
+                    if(cartController.cartItems.isEmpty){
+                      Get.snackbar("Error", "Your cart is empty");
+                      return;
+
+                    }
+                    Get.toNamed("/checkout");
+                  },
                   txt: "Checkout",
                    bgColor: mainColor,
                 ),
