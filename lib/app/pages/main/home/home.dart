@@ -84,7 +84,9 @@ class HomePage extends StatelessWidget {
                   iconComponent(
                     Icons.shopping_bag_outlined,
                     const Color(0xFFF1E3C8),
-                    () {},
+                    () {
+                      Get.toNamed("/cart");
+                    },
                   ),
 
                   if (cartController.cartItems.isNotEmpty)

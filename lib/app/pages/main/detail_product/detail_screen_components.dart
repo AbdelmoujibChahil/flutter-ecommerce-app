@@ -6,40 +6,10 @@ import 'package:project/app/controllers/main/productController/CartController.da
 import 'package:project/app/controllers/main/productController/DetailController.dart';
 import 'package:project/app/models/Products/product.dart';
 import 'package:project/app/pages/components/button_component.dart';
-import 'package:project/app/pages/components/cart_component/cartBadge_component.dart';
 import 'package:project/app/pages/components/icon_component/icon_component.dart';
 import 'package:project/app/pages/components/space_component.dart';
 import 'package:project/app/pages/components/text_component.dart';
 import 'package:project/utils/colors.dart';
-
-
- //APPBAR
- AppBar buildAppBar(DetailController detailController,CartController cartController) {
-    return AppBar(
-      toolbarHeight: 80,
-      elevation: 0,
-      backgroundColor: Colors.white,
-      leading: iconComponent(Icons.arrow_back, Colors.white, () {
-        detailController.reset();
-        Get.back();
-      }),
-      title: const TextComponent(
-        txt: "Product Details",
-        family: "Bold",
-      ),
-      centerTitle: true,
-      actions: [
-        Obx(() => Stack(
-              children: [
-                iconComponent(Icons.shopping_bag_outlined,
-                    const Color(0xFFF1E3C8), () {}),
-                if (cartController.cartItems.isNotEmpty)
-                  buildCartBadge(cartController),
-              ],
-            ))
-      ],
-    );
-  }
 
 
 //TITLE ROW

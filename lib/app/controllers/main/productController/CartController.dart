@@ -49,6 +49,7 @@ class CartController extends GetxController {
         product.colors.isNotEmpty ? product.colors.first : null,
       ),
       "quantity": 1,
+      "image": product.images,
     };
   }
 
@@ -80,5 +81,42 @@ void _add(Map<String, dynamic> order) {
         ? null
         : "#${color.value.toRadixString(16).substring(2).toUpperCase()}";
   }
+
+  double calculeTotal() {
+    double total = 0.0;
+    for (var item in cartItems) {
+      total += (item["price"] ?? 0) * (item["quantity"] ?? 1);
+    }
+    return total;
+  }
+//increse quantity
+void increaseQuantity(int index) {
+  if (index < 0 || index >= cartItems.length) return;
+
+  int currentQty = cartItems[index]["quantity"] ?? 0;
+  cartItems[index]["quantity"] = currentQty + 1;
+
+  cartItems.refresh();
+}
+
+void decreaseQuantity(int index) {
+  if (index < 0 || index >= cartItems.length) return;
+
+  int currentQty = cartItems[index]["quantity"] ?? 1;
+
+  if (currentQty > 1) {
+    cartItems[index]["quantity"] = currentQty - 1;
+  } else {
+    cartItems.removeAt(index); // supprimer si = 1
+  }
+
+  cartItems.refresh();
+}
+
+void removeItem(int index) {
+  if (index < 0 || index >= cartItems.length) return;
+
+  cartItems.removeAt(index);
+  cartItems.refresh();}
 
 }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:project/app/controllers/main/productController/CartController.dart';
 import 'package:project/app/controllers/main/productController/DetailController.dart';
 import 'package:project/app/models/Products/product.dart';
+import 'package:project/app/pages/components/appBar_component/appBar_component.dart';
 import 'package:project/app/pages/components/space_component.dart';
 import 'package:project/app/pages/components/text_component.dart';
 import 'package:project/app/pages/main/detail_product/detail_screen_components.dart';
@@ -18,7 +19,7 @@ class DetailScreen extends StatelessWidget {
     final images = product.images ?? [];
 
     return Scaffold(
-      appBar: buildAppBar(  detailController, cartController),
+      appBar: buildAppBar(  detailController, cartController,"Product Details"),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
