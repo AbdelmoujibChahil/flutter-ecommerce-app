@@ -11,10 +11,11 @@ class CartController extends GetxController {
 
     return {
       "product_id": product.id,
+      "name": product.name,
+      "price": product.price,
+      "image": product.images,
       "size": size,
-      "color": color == null
-          ? null
-          : "#${color.value.toRadixString(16).substring(2).toUpperCase()}",
+      "color": _colorToHex(color),
       "quantity": 1,
     };
   }
