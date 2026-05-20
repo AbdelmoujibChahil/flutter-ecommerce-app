@@ -7,6 +7,8 @@ import 'package:project/app/pages/auth/forgotPassword/otp.dart';
 import 'package:project/app/pages/auth/resetPassword/resetPassword.dart';
 import 'package:project/app/pages/auth/signup/signup_page.dart';
 import 'package:project/app/pages/checkout/checkout_screen.dart';
+import 'package:project/app/pages/checkout/payment_screen.dart';
+import 'package:project/app/pages/checkout/review_screen.dart';
 import 'package:project/app/pages/main/cart/cart_screen.dart';
 import 'package:project/app/pages/main/detail_product/detail_screen.dart';
 import 'package:project/app/pages/main/filter/filter_screen.dart';
@@ -42,6 +44,9 @@ void main() {
           "/detail"     : (context) => DetailScreen(),
           "/cart"       : (context) => MyCart(),
           "/checkout"    : (context) => CheckoutScreen(),          
+          "/payment"    : (context) => PaymentMethodsScreen(),      
+          "/review"    : (context) => ReviewScreen(),          
+    
       },
       
     ),
