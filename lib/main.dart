@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/app/middleware/auth_middleware.dart';
+import 'package:project/app/middleware/guest_middleware.dart';
 import 'package:project/app/pages/auth/congratulation/congratulation_page.dart';
 import 'package:project/app/pages/auth/forgotPassword/forgotPassword_page.dart';
 import 'package:project/app/pages/auth/forgotPassword/otp.dart';
@@ -14,6 +16,7 @@ import 'package:project/app/pages/main/detail_product/detail_screen.dart';
 import 'package:project/app/pages/main/filter/filter_screen.dart';
 import 'package:project/app/pages/main/getStarted/getStarted.dart';
 import 'package:project/app/pages/main/home/home.dart';
+import 'package:project/app/pages/profile/edit_profile_screen.dart';
 import 'package:project/app/pages/welcome/welcomePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,7 +27,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   pref = await SharedPreferences.getInstance();
-
+  Get.put(pref!);
   runApp(MyApp());
 }
 
@@ -48,7 +51,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      initialRoute: "/home",
+      initialRoute: "/",
 
       getPages: [
 
@@ -125,6 +128,11 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/review",
           page: () => ReviewScreen(),
+        ),
+       
+        GetPage(
+          name: "/edit-profile", 
+          page: () => EditProfileScreen(),
         ),
       ],
     );
