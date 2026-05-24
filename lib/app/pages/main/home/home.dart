@@ -12,6 +12,7 @@ import 'package:project/app/pages/components/icon_component/icon_component.dart'
 import 'package:project/app/pages/components/image_Component.dart';
 import 'package:project/app/pages/components/space_component.dart';
 import 'package:project/app/pages/components/text_component.dart';
+import 'package:project/main.dart';
 import 'package:project/utils/colors.dart';
 
 class HomePage extends StatelessWidget {
@@ -139,7 +140,11 @@ class HomePage extends StatelessWidget {
               _drawerItem(
                 icon: Icons.logout,
                 title: "Log Out",
-                onTap: () {},
+                onTap: ()async {
+                     await pref!.remove("token");
+                     await pref!.remove("isLoggedIn");                
+                     Get.offAllNamed("/login");
+                },
               ),
             ],
           ),
