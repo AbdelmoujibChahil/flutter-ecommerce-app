@@ -1,12 +1,15 @@
 import 'package:http/http.dart' as http;
+import 'package:project/app/models/user/user.dart';
 import 'dart:convert';
+
+import 'package:project/main.dart';
 
 class AuthService {
   //LOGIN SERVICE
   Future<bool> login(String email, String password) async {
 
     final response = await http.post(
-      Uri.parse("https://api.example.com/login"),
+      Uri.parse("http://10.0.2.2:8000/api/v1/login"),
       body: {
         "email": email,
         "password": password
@@ -15,7 +18,10 @@ class AuthService {
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
-      String token = data["token"];
+      String token = data["access_token"] ;
+     UserModel user = UserModel.fromJson(data["user"]);
+     await pref!.setString("token", token);
+     await pref!.setString("user", jsonEncode(user.toJson()));
 
       // sauvegarder token
       return true;
@@ -28,7 +34,7 @@ class AuthService {
     Future<bool> signup(String email, String password,String tel) async {
 
     final response = await http.post(
-      Uri.parse("https://api.example.com/signup"), //API Url
+      Uri.parse("http://localhost:8000/api/v1/register"), //API Url
       body: {
         "email": email,
         "password": password,
@@ -39,7 +45,6 @@ class AuthService {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       String token = data["token"];
-
       // sauvegarder token
       return true;
     }
