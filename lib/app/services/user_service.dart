@@ -1,5 +1,3 @@
-/// ================= USER SERVICE =================
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:project/app/models/user/user.dart';
@@ -7,24 +5,22 @@ import 'package:project/app/models/user/user.dart';
 class UserService {
 
   final String baseUrl =
-      "http://10.0.2.2:3000/api";
+      "http://10.0.2.2:8000/api/v1";
 
   /// GET USER PROFILE
   Future<UserModel?> getProfile(String token) async {
 
     final response = await http.get(
 
-      Uri.parse("$baseUrl/user/profile"),
+      Uri.parse("$baseUrl/me"),
 
       headers: {
         "Authorization": "Bearer $token",
       },
     );
-
     if (response.statusCode == 200) {
 
       final data = jsonDecode(response.body);
-
       return UserModel.fromJson(data);
     }
 
@@ -41,7 +37,7 @@ class UserService {
 
     final response = await http.put(
 
-      Uri.parse("$baseUrl/user/profile"),
+      Uri.parse("$baseUrl/users/profile"),
 
       headers: {
         "Content-Type": "application/json",

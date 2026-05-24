@@ -14,7 +14,6 @@ class EditProfileScreen extends StatelessWidget {
 
   final controller =
       Get.put(EditProfileController());
-
   @override
   Widget build(BuildContext context) {
 
@@ -67,7 +66,7 @@ class EditProfileScreen extends StatelessWidget {
                       ),
                       image: const DecorationImage(
                         image: AssetImage(
-                          "assets/images/profile.jpg",
+                          "assets/images/home.jpg",
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -114,7 +113,7 @@ class EditProfileScreen extends StatelessWidget {
               FormfieldComponent(
                 border: true,
                 controller: controller.nameController,
-                hintText: "Enter your name",
+                hintText: controller.nameController.text ??  "Enter your name",
                 prefixIcon: const Icon(Icons.person_outline),
               ),
 
@@ -135,7 +134,7 @@ class EditProfileScreen extends StatelessWidget {
                                 border: true,
 
                 controller: controller.emailController,
-                hintText: "Enter your email",
+                hintText: controller.emailController.text ?? "Enter your email",
                 prefixIcon: const Icon(Icons.email_outlined),
               ),
 
@@ -156,7 +155,7 @@ class EditProfileScreen extends StatelessWidget {
                                 border: true,
 
                 controller: controller.phoneController,
-                hintText: "Enter your phone number",
+                hintText: controller.phoneController.text ?? "Enter your phone number",
                 prefixIcon: const Icon(Icons.phone_outlined),
               ),
 
@@ -177,13 +176,7 @@ class EditProfileScreen extends StatelessWidget {
                   ),
 
                   onPressed: () {
-
-                    Get.snackbar(
-                      "Success",
-                      "Profile updated successfully",
-                      backgroundColor: mainColor,
-                      colorText: Colors.white,
-                    );
+                    controller.updateProfile();
                   },
 
                   child: TextComponent(

@@ -37,18 +37,18 @@ class EditProfileController extends GetxController {
 
       isLoading.value = true;
 
-      String token = pref.getString("token") ?? "";
+      String token = pref.getString("token") ?? "" ;
 
       UserModel? response =
           await _userService.getProfile(token);
-
+      
       if (response != null) {
 
         user.value = response;
 
         nameController.text = response.name;
         emailController.text = response.email;
-        phoneController.text = response.phone;
+        phoneController.text = response.phone ?? "";
       }
 
     } catch (e) {
@@ -71,7 +71,7 @@ class EditProfileController extends GetxController {
 
       isLoading.value = true;
 
-      String token = pref.getString("token") ?? "";
+      String token = pref.getString("token") ?? "" ;
 
       bool success =
           await _userService.updateProfile(
@@ -91,6 +91,7 @@ class EditProfileController extends GetxController {
           "Success",
           "Profile updated successfully",
         );
+        Get.toNamed("/home");
 
       } else {
 
