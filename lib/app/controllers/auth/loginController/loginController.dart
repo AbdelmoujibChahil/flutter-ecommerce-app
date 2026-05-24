@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/app/services/auth_service.dart';
+import 'package:project/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
   final AuthService _authService = AuthService();
@@ -16,17 +18,17 @@ class LoginController extends GetxController {
     isLoading.value = true;
     errorMessage.value = null;
 
-  /* 
-   bool success = await _authService.login(
+  
+  bool success = await _authService.login(
       emailController.text.trim(),
       passwordController.text.trim(),
-    );*/
-
+    );
+  
 //For testing
-   dynamic success= true;
     isLoading.value = false;
 
     if (success) {
+      await pref!.setBool("isLoggedIn", true);
       Get.offAllNamed('/home');
     } else {
       errorMessage.value = 'Login failed. Please check your credentials.';
