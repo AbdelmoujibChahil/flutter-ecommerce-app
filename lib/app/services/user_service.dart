@@ -29,29 +29,57 @@ class UserService {
 
   /// UPDATE PROFILE
   Future<bool> updateProfile({
-    required String token,
-    required String name,
-    required String email,
-    required String phone,
-  }) async {
 
-    final response = await http.put(
+  required String token,
+  required String name,
+  required String email,
+  required String phone,
+  required String imagePath,
 
-      Uri.parse("$baseUrl/users/profile"),
+}) async {
 
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $token",
-      },
+  var request = http.MultipartRequest(
 
-      body: jsonEncode({
+    "POST",
 
-        "name": name,
-        "email": email,
-        "phone": phone,
-      }),
+    Uri.parse(
+      "http://10.0.2.2:8000/api/v1/users/profile",
+    ),
+  );
+
+  request.headers.addAll({
+
+    "Authorization": "Bearer $token",
+    "Accept": "application/json",
+
+  });
+
+  // METHOD SPOOFING
+  request.fields["_method"] = "PUT";
+
+  request.fields["name"] = name;
+  request.fields["email"] = email;
+  request.fields["phone"] = phone;
+
+  // IMAGE
+  if (imagePath.isNotEmpty) {
+
+    request.files.add(
+
+      await http.MultipartFile.fromPath(
+        "image",
+        imagePath,
+      ),
     );
-
-    return response.statusCode == 200;
   }
+
+  final response = await request.send();
+  print(imagePath);
+  if (response.statusCode == 200) {
+
+    return true;
+  }
+
+  return false;
+}
 }
