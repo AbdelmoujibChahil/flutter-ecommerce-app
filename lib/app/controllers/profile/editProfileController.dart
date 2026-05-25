@@ -1,5 +1,6 @@
-/// ================= EDIT PROFILE CONTROLLER =================
 
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/app/models/user/user.dart';
@@ -19,6 +20,10 @@ class EditProfileController extends GetxController {
   Rx<UserModel?> user = Rx<UserModel?>(null);
 
   late SharedPreferences pref;
+
+  Rx<File?> image = Rx<File?>(null);
+  final picker = ImagePicker();
+
 
   @override
   void onInit() {
@@ -41,7 +46,6 @@ class EditProfileController extends GetxController {
 
       UserModel? response =
           await _userService.getProfile(token);
-      
       if (response != null) {
 
         user.value = response;
@@ -83,6 +87,8 @@ class EditProfileController extends GetxController {
         email: emailController.text.trim(),
 
         phone: phoneController.text.trim(),
+
+        imagePath: image.value != null ? image.value!.path : "",
       );
 
       if (success) {
@@ -113,6 +119,25 @@ class EditProfileController extends GetxController {
       isLoading.value = false;
     }
   }
+
+    Future<void> pickImage() async {
+
+      final pickedFile = await picker.pickImage(
+        source: ImageSource.camera,
+      );
+
+      if (pickedFile != null) {
+
+        image.value = File(pickedFile.path);
+
+      } else {
+
+        Get.snackbar(
+          "Error",
+          "No image selected",
+        );
+      }
+    }
 
   @override
   void onClose() {
