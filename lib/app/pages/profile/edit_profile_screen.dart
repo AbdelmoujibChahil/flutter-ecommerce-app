@@ -1,4 +1,3 @@
-/// ================= EDIT PROFILE PAGE =================
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +10,6 @@ import 'package:project/utils/colors.dart';
 class EditProfileScreen extends StatelessWidget {
 
   EditProfileScreen({super.key});
-
   final controller =
       Get.put(EditProfileController());
   @override
@@ -64,10 +62,12 @@ class EditProfileScreen extends StatelessWidget {
                         color: mainColor,
                         width: 3,
                       ),
-                      image: const DecorationImage(
-                        image: AssetImage(
-                          "assets/images/home.jpg",
-                        ),
+                      image:  DecorationImage(
+                        image: controller.image.value != null
+                            ? FileImage(controller.image.value!)
+                            : AssetImage(
+                                'assets/images/profile.png',
+                                ),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -78,7 +78,7 @@ class EditProfileScreen extends StatelessWidget {
                     right: 0,
                     child: GestureDetector(
                       onTap: () {
-                        /// PICK IMAGE
+                          controller.pickImage();
                       },
                       child: Container(
                         padding: const EdgeInsets.all(10),
