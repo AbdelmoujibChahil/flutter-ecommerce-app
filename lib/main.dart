@@ -16,6 +16,8 @@ import 'package:project/app/pages/main/detail_product/detail_screen.dart';
 import 'package:project/app/pages/main/filter/filter_screen.dart';
 import 'package:project/app/pages/main/getStarted/getStarted.dart';
 import 'package:project/app/pages/main/home/home.dart';
+import 'package:project/app/pages/main/seeAll/see_all_screen.dart';
+import 'package:project/app/pages/notification/notification_screen.dart';
 import 'package:project/app/pages/profile/edit_profile_screen.dart';
 import 'package:project/app/pages/welcome/welcomePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,7 +53,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      initialRoute: "/",
+      initialRoute: "/home",
 
       getPages: [
 
@@ -133,6 +135,11 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/edit-profile", 
           page: () => EditProfileScreen(),
+        ),
+
+        GetPage(
+          name: "/notification", 
+          page: () => NotificationScreen(),
         ),
       ],
     );
