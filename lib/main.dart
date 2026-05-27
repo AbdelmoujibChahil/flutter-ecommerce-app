@@ -141,6 +141,11 @@ class MyApp extends StatelessWidget {
           name: "/notification", 
           page: () => NotificationScreen(),
         ),
+
+        GetPage(
+          name: "/seeAll", 
+          page: () => SeeAllProductScreen(),
+        ),
       ],
     );
   }

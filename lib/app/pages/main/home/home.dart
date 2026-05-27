@@ -97,7 +97,9 @@ class HomePage extends StatelessWidget {
               _drawerItem(
                 icon: Icons.notifications_none,
                 title: "Notification",
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed("/notification");
+                },
               ),
 
               _drawerItem(
@@ -298,7 +300,7 @@ Widget _buildSectionHeader(String title) {
       ),
       TextButton(
         onPressed: () {
-           // REDIRECT PAGE ALL
+          Get.toNamed("/seeAll");
         },
         child: TextComponent(
           txt: "See all",
