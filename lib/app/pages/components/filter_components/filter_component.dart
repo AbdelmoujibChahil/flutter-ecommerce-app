@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/app/pages/components/text_component.dart';
+import 'package:project/utils/colors.dart';
 
 Widget sectionTitle(String text) {
   return Padding(
@@ -16,10 +17,10 @@ Widget chip({
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
     decoration: BoxDecoration(
-      color: selected ? Colors.indigo : Colors.white,
+      color: selected ? mainColor : Colors.white,
       borderRadius: BorderRadius.circular(20),
       border: Border.all(
-        color: selected ? Colors.indigo : Colors.grey.shade300,
+        color: selected ? mainColor : Colors.grey.shade300,
       ),
     ),
     child: Text(

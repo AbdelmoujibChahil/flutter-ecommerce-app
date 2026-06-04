@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:project/app/controllers/main/filterController/filterController.dart';
 import 'package:project/app/pages/components/filter_components/filter_component.dart';
 import 'package:project/app/pages/components/text_component.dart';
+import 'package:project/utils/colors.dart';
 
 class FilterScreen extends StatelessWidget {
   FilterScreen({super.key});
@@ -141,7 +142,7 @@ class FilterScreen extends StatelessWidget {
                 height: 55,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.indigo,
+                    backgroundColor: mainColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),

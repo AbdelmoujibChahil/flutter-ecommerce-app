@@ -43,7 +43,7 @@ class WelcomePage extends StatelessWidget {
                    h(70),
               ButtonComponent(onPressed:(){Get.toNamed("/login"); } , txt: "Login", bgColor: mainColor),
                    h(20),
-               ButtonComponent(onPressed:(){Get.toNamed('/signup');} , txt: "Sign Up", bgColor: loginButtonColor,isSelected: false,),
+               ButtonComponent(onPressed:(){Get.toNamed('/signup');} , txt: "Sign Up", bgColor: mainColor,isSelected: false,),
                    h(50),
             
             ],

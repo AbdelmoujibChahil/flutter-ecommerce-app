@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:project/utils/colors.dart';
 
 class StepIndicator extends StatelessWidget {
   final int current;
@@ -31,9 +32,9 @@ class StepIndicator extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: isActive
-                          ? const Color(0xFF3D3DC8)
+                          ? mainColor
                           : isDone
-                              ? const Color(0xFF3D3DC8).withOpacity(0.4)
+                              ? mainColor.withOpacity(0.4)
                               : const Color(0xFFD9D9D9),
                     ),
                     child: isDone
@@ -45,7 +46,7 @@ class StepIndicator extends StatelessWidget {
                       child: Container(
                         height: 2,
                         color: isDone
-                            ? const Color(0xFF3D3DC8).withOpacity(0.4)
+                            ? mainColor.withOpacity(0.4)
                             : const Color(0xFFD9D9D9),
                       ),
                     ),
