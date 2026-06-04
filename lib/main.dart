@@ -56,97 +56,113 @@ class MyApp extends StatelessWidget {
       initialRoute: "/home",
 
       getPages: [
+          GetPage(
+            name: "/",
+            page: () => WelcomePage(),
+          ),
 
-        GetPage(
-          name: "/",
-          page: () => WelcomePage(),
-        ),
+          GetPage(
+            name: "/login",
+            page: () => LoginPage(),
+            middlewares: [GuestMiddleware()],
+          ),
 
-        GetPage(
-          name: "/home",
-          page: () => HomePage(),
-        ),
+          GetPage(
+            name: "/signup",
+            page: () => SignupPage(),
+            middlewares: [GuestMiddleware()],
+          ),
 
-        GetPage(
-          name: "/login",
-          page: () => LoginPage(),
-        ),
+          GetPage(
+            name: "/forgot",
+            page: () => ForgotpasswordPage(),
+            middlewares: [GuestMiddleware()],
+          ),
 
-        GetPage(
-          name: "/signup",
-          page: () => SignupPage(),
-        ),
+          GetPage(
+            name: "/verification",
+            page: () => OtpPage(),
+            middlewares: [GuestMiddleware()],
+          ),
 
-        GetPage(
-          name: "/forgot",
-          page: () => ForgotpasswordPage(),
-        ),
+          GetPage(
+            name: "/reset",
+            page: () => ResetPasswordPage(),
+            middlewares: [GuestMiddleware()],
+          ),
 
-        GetPage(
-          name: "/verification",
-          page: () => OtpPage(),
-        ),
+          GetPage(
+            name: "/congratulation",
+            page: () => CongratulationPage(),
+            middlewares: [GuestMiddleware()],
+          ),
 
-        GetPage(
-          name: "/reset",
-          page: () => ResetPasswordPage(),
-        ),
+          GetPage(
+            name: "/getStarted",
+            page: () => GetstartedPage(),
+            middlewares: [GuestMiddleware()],
+          ),
 
-        GetPage(
-          name: "/congratulation",
-          page: () => CongratulationPage(),
-        ),
+          GetPage(
+            name: "/home",
+            page: () => HomePage(),
+            middlewares: [AuthMiddleware()],
+          ),
 
-        GetPage(
-          name: "/getStarted",
-          page: () => GetstartedPage(),
-        ),
+          GetPage(
+            name: "/filter",
+            page: () => FilterScreen(),
+            middlewares: [AuthMiddleware()],
+          ),
 
-        GetPage(
-          name: "/filter",
-          page: () => FilterScreen(),
-        ),
+          GetPage(
+            name: "/detail",
+            page: () => DetailScreen(),
+            middlewares: [AuthMiddleware()],
+          ),
 
-        GetPage(
-          name: "/detail",
-          page: () => DetailScreen(),
-        ),
+          GetPage(
+            name: "/cart",
+            page: () => MyCart(),
+            middlewares: [AuthMiddleware()],
+          ),
 
-        GetPage(
-          name: "/cart",
-          page: () => MyCart(),
-        ),
+          GetPage(
+            name: "/checkout",
+            page: () => CheckoutScreen(),
+            middlewares: [AuthMiddleware()],
+          ),
 
-        GetPage(
-          name: "/checkout",
-          page: () => CheckoutScreen(),
-        ),
+          GetPage(
+            name: "/payment",
+            page: () => PaymentMethodsScreen(),
+            middlewares: [AuthMiddleware()],
+          ),
 
-        GetPage(
-          name: "/payment",
-          page: () => PaymentMethodsScreen(),
-        ),
+          GetPage(
+            name: "/review",
+            page: () => ReviewScreen(),
+            middlewares: [AuthMiddleware()],
+          ),
 
-        GetPage(
-          name: "/review",
-          page: () => ReviewScreen(),
-        ),
-       
-        GetPage(
-          name: "/edit-profile", 
-          page: () => EditProfileScreen(),
-        ),
+          GetPage(
+            name: "/edit-profile",
+            page: () => EditProfileScreen(),
+            middlewares: [AuthMiddleware()],
+          ),
 
-        GetPage(
-          name: "/notification", 
-          page: () => NotificationScreen(),
-        ),
+          GetPage(
+            name: "/notification",
+            page: () => NotificationScreen(),
+            middlewares: [AuthMiddleware()],
+          ),
 
-        GetPage(
-          name: "/seeAll", 
-          page: () => SeeAllProductScreen(),
-        ),
-      ],
+          GetPage(
+            name: "/seeAll",
+            page: () => SeeAllProductScreen(),
+            middlewares: [AuthMiddleware()],
+          ),
+],
     );
   }
 }

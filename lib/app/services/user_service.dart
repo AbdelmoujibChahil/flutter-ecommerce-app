@@ -74,7 +74,6 @@ class UserService {
   }
 
   final response = await request.send();
-  print(imagePath);
   if (response.statusCode == 200) {
 
     return true;

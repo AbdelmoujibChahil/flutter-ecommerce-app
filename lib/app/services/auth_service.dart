@@ -19,9 +19,7 @@ class AuthService {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       String token = data["access_token"] ;
-     UserModel user = UserModel.fromJson(data["user"]);
      await pref!.setString("token", token);
-     await pref!.setString("user", jsonEncode(user.toJson()));
 
       // sauvegarder token
       return true;
