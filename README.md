@@ -1,17 +1,56 @@
-# project
+#  Flutter E-Commerce Application
 
-A new Flutter project.
+##  Overview
 
-## Getting Started
+This is a mobile e-commerce application built with Flutter. It provides users with a smooth and modern shopping experience, allowing them to browse products, manage their cart, and place orders efficiently through a responsive and user-friendly interface.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## Features
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+* User authentication (login, signup, password reset)
+* Product listing with categories and filters
+* Product details page
+* Shopping cart management
+* Checkout process
+* User profile management
+* Responsive UI for different screen sizes
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## Architecture
+
+The project follows a **feature-based architecture** with a clear separation of concerns:
+
+* **Pages (UI layer)** → Screens and user interface
+* **Controllers** → Business logic and state management
+* **Services** → API communication layer
+* **Models** → Data structures
+* **Middleware** → Route protection and authentication handling
+
+Additionally, the project uses **GetX** for reactive state management.
+
+---
+
+##  Technologies Used
+
+* Flutter
+* Dart
+* GetX
+* REST API
+* MySQL (backend)
+* Git & GitHub
+
+---
+
+##  Project Goal
+
+The goal of this project is to build a scalable and maintainable mobile e-commerce application while applying modern software architecture principles and best practices in Flutter development.
+
+---
+
+##  Status
+
+ This project is currently under development and continuously improving.
+
+---
